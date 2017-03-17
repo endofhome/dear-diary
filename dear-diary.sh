@@ -5,9 +5,9 @@ set -e -o pipefail
 DIARY_FILE="diary.txt"
 
 function main {
-  echo "Dear diary... Enter 'end' if you have no more entries for today."
   while true; do
     echo "Who did you pair with?"
+    echo "Leave blank if you worked solo and enter 'end' when you have no more entries for today."
     printf "> " && read PAIR_PARTNER
     
     if [[ $PAIR_PARTNER = "end" ]]; then
@@ -16,8 +16,16 @@ function main {
     
     echo "What did you do?"
     printf "> " && read DETAILS
-    echo "$(date '+%A %d %B %Y'), Paired with $(echo $PAIR_PARTNER | awk '{print toupper($0)}'): $DETAILS" >> $DIARY_FILE
+    echo "$(date '+%A %d %B %Y'), $(partner): $DETAILS" >> $DIARY_FILE
   done
+}
+
+function partner {
+  if [[ -n $PAIR_PARTNER ]]; then
+    echo $(echo Paired with $(echo $PAIR_PARTNER | awk '{print toupper($0)}'))
+  else
+    echo "Worked solo"
+  fi
 }
 
 main

@@ -58,7 +58,7 @@ function diary_entries {
   do
     cat << EOF
     <div>
-        <p>$(echo $ENTRY | sed 's/, /<br \/>/')</p>
+        <p><strong>$(echo $ENTRY | sed 's/, /<br \/><\/strong>/')</p>
     </div>
 EOF
   done

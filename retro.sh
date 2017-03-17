@@ -81,13 +81,13 @@ function getProjectEnvVars {
   if [[ -z $PROJECT_NAME ]]; then
     echo "Please enter your project name"
     printf "> " && read PROJECT_NAME
-    echo $PROJECT_NAME >> $ENV_FILE
+    echo "PROJECT_NAME=\"$PROJECT_NAME\"" >> $ENV_FILE
   fi
 
   if [[ -z $RETRO_FREQUENCY ]]; then
     echo "How often do you normally have a retro?"
     printf "> " && read RETRO_FREQUENCY
-    echo $RETRO_FREQUENCY >> $ENV_FILE
+    echo "RETRO_FREQUENCY=\"$RETRO_FREQUENCY\"" >> $ENV_FILE
   fi
 }
 

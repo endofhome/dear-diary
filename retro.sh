@@ -4,11 +4,10 @@ set -e -o pipefail
 
 DIARY_FILE="diary.txt"
 OUTPUT_FILE="retro.html"
-
-RETRO_FREQUENCY="some frequency"
-PROJECT_NAME="some project"
+ENV_FILE="retro.env"
 
 function main {
+  getProjectEnvVars
   header > $OUTPUT_FILE
   diary_entries >> $OUTPUT_FILE
   footer >> $OUTPUT_FILE
@@ -65,6 +64,24 @@ function footer {
 </body>
 </html>
 EOF
+}
+
+function getProjectEnvVars {
+  if [[ -r retro.env ]]; then
+    . $ENV_FILE
+  fi
+
+  if [[ -z $PROJECT_NAME ]]; then
+    echo "Please enter your project name"
+    printf "> " && read PROJECT_NAME
+    echo $PROJECT_NAME >> $ENV_FILE
+  fi
+
+  if [[ -z $RETRO_FREQUENCY ]]; then
+    echo "How often do you normally have a retro?"
+    printf "> " && read RETRO_FREQUENCY
+    echo $RETRO_FREQUENCY >> $ENV_FILE
+  fi
 }
 
 main

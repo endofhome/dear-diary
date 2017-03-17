@@ -58,7 +58,7 @@ function diary_entries {
   do
     cat << EOF
     <div>
-        <p style="margin-top=10%">$(echo $ENTRY | sed 's/, /<br \/>/')</p>
+        <p>$(echo $ENTRY | sed 's/, /<br \/>/')</p>
     </div>
 EOF
   done
@@ -104,7 +104,7 @@ EOF
 function spacer {
   cat << EOF
   </div>
-  <div style="margin-top: 10%">
+  <div>
 EOF
 }
 

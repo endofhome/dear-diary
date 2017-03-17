@@ -12,3 +12,9 @@
     display: block;
     margin-left: 5px;
 }
+
+span:hover {
+    background-color: #D3D3D3;
+    color: #000;
+    transition:.5s;
+}

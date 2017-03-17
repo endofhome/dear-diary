@@ -1,0 +1,17 @@
+span.circle:first-child {
+    margin-left: 0;
+}
+.circle {
+    width: 9%;
+    height: 10%;
+    border-radius: 50px;
+    font-size: 22px;
+    color: #fff;
+    line-height: 87px;
+    text-align: center;
+    background: #000;
+    float: left;
+    word-wrap: break-word;
+    display: block;
+    margin-left: 5px;
+}

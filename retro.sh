@@ -9,7 +9,11 @@ ENV_FILE="retro.env"
 function main {
   getProjectEnvVars
   header > $OUTPUT_FILE
+  echo "<div>" >> $OUTPUT_FILE
+  top10hits >> $OUTPUT_FILE
+  spacer >> $OUTPUT_FILE
   diary_entries >> $OUTPUT_FILE
+  echo "</div>" >> $OUTPUT_FILE
   footer >> $OUTPUT_FILE
 }
 
@@ -24,6 +28,7 @@ function header {
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="retro.css">
 
     <style type="text/css">
         /* https://necolas.github.io/normalize.css/ */
@@ -51,9 +56,11 @@ function diary_entries {
 
   for ENTRY in $(cat diary.txt)
   do
-    echo "    <div>"
-    echo "        <p>$(echo $ENTRY | sed 's/, /<br \/>/')</p>"
-    echo "    </div>"
+    cat << EOF
+    <div>
+        <p style="margin-top=10%">$(echo $ENTRY | sed 's/, /<br \/>/')</p>
+    </div>
+EOF
   done
 }
 
@@ -82,6 +89,23 @@ function getProjectEnvVars {
     printf "> " && read RETRO_FREQUENCY
     echo $RETRO_FREQUENCY >> $ENV_FILE
   fi
+}
+
+function top10hits {
+  TOP10=$(cat diary.txt | tr -c '[:alnum:]' '[\n*]' | tr -d ' ' | tr -s '[:blank:]' '\n' | fgrep -vf stopwords.txt | sort | uniq -c | sort -nr | head  -10 | awk '{print $2}')
+  for HIT in $TOP10
+  do
+    cat << EOF
+      <span class="circle"">$HIT</span>
+EOF
+  done
+}
+
+function spacer {
+  cat << EOF
+  </div>
+  <div style="margin-top: 10%">
+EOF
 }
 
 main

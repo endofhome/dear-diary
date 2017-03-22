@@ -2,7 +2,9 @@
 
 set -e -o pipefail
 
-DIARY_FILE="diary.txt"
+if [[ -z "$DIARY_FILE" ]]; then
+  DIARY_FILE=~/.diary.txt
+fi
 
 function main {
   while true; do

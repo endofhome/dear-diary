@@ -2,9 +2,12 @@
 
 set -e -o pipefail
 
-DIARY_FILE="diary.txt"
-OUTPUT_FILE="retro.html"
-ENV_FILE="retro.env"
+if [[ -z "$DIARY_FILE" ]]; then
+  DIARY_FILE=~/.diary.txt
+fi
+OUTPUT_FILE=retro.html
+ENV_FILE=retro.env
+STOPWORDS_FILE=stopwords.txt
 
 function main {
   getProjectEnvVars
@@ -54,7 +57,7 @@ EOF
 function diary_entries {
   IFS=$'\n'
 
-  for ENTRY in $(cat diary.txt)
+  for ENTRY in $(cat $DIARY_FILE)
   do
     cat << EOF
     <div>
@@ -74,8 +77,8 @@ EOF
 }
 
 function getProjectEnvVars {
-  if [[ -r retro.env ]]; then
-    . $ENV_FILE
+  if [[ -r $ENV_FILE ]]; then
+    . "$ENV_FILE"
   fi
 
   if [[ -z $PROJECT_NAME ]]; then
@@ -92,7 +95,7 @@ function getProjectEnvVars {
 }
 
 function top10hits {
-  TOP10=$(cat diary.txt | tr -c '[:alnum:]' '[\n*]' | tr -d ' ' | tr -s '[:blank:]' '\n' | fgrep -vf stopwords.txt | sort | uniq -c | sort -nr | head  -10 | awk '{print $2}')
+  TOP10=$(cat $DIARY_FILE | tr -c '[:alnum:]' '[\n*]' | tr -d ' ' | tr -s '[:blank:]' '\n' | fgrep -vf $STOPWORDS_FILE | sort | uniq -c | sort -nr | head  -10 | awk '{print $2}')
   for HIT in $TOP10
   do
     cat << EOF

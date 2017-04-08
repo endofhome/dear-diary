@@ -18,3 +18,8 @@ load 'libs/bats-assert/load'
   run bash top_ten.sh -d "bob" -s "bob"
   assert_output ""
 }
+
+@test "two words, neither in stopwords, returns both words" {
+  run bash top_ten.sh -d "bob bert" -s "kim"
+  assert_output "bob bert"
+}

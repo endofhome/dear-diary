@@ -38,3 +38,8 @@ load 'libs/bats-assert/load'
   run bash top_ten.sh -d "bob bert kim gordon steve shelley thurston moore lee ranaldo" -s "jim"
   assert_output "bob bert kim gordon steve shelley thurston moore lee ranaldo"
 }
+
+@test "ten words, five in stopwords, returns other five" {
+  run bash top_ten.sh -d  "bob bert kim gordon steve shelley thurston moore lee ranaldo" -s "bob kim shelley moore lee"
+  assert_output "bert gordon steve thurston ranaldo"
+}

@@ -53,3 +53,13 @@ load 'libs/bats-assert/load'
   run bash top_ten.sh -d "lee kim kim kim shelley shelley" -s "jim"
   assert_output "kim shelley lee"
 }
+
+@test "eleven unique words used repeatedly, top ten are returned" {
+  run bash top_ten.sh -d "a b b c c c d d d d e e e e e f f f f f f g g g g g g g h h h h h h h h i i i i i i i i i j j j j j j j j j j k k k k k k k k k k k" -s "z"
+  assert_output "k j i h g f e d c b"
+}
+
+@test "if more than ten words are in the 'top ten', fall back on reverse alphabetical order and never take more than ten" {
+  run bash top_ten.sh -d "k k j j i i h h g g f e d c b a" -s "z"
+  assert_output "k j i h g f e d c b"
+}

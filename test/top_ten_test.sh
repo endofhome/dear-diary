@@ -43,3 +43,8 @@ load 'libs/bats-assert/load'
   run bash top_ten.sh -d  "bob bert kim gordon steve shelley thurston moore lee ranaldo" -s "bob kim shelley moore lee"
   assert_output "bert gordon steve thurston ranaldo"
 }
+
+@test "ten words including duplicates, none in stopwords, returns all ten without duplicates" {
+  run bash top_ten.sh -d "bob bob kim kim steve steve thurston thurston lee lee" -s "jim"
+  assert_output "bob kim steve thurston lee"
+}

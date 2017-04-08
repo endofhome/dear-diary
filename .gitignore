@@ -4,3 +4,5 @@ diary.bak
 .idea/*
 test.html
 retro.html
+temp_*_file.txt
+tmux-client*.log

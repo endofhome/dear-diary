@@ -24,7 +24,7 @@ while getopts d:s: opt; do
     d) echo $OPTARG > $TEMP_DIARY_FILE
       DIARY_FILE="./$TEMP_DIARY_FILE"
       ;;
-    s) echo $OPTARG > $TEMP_STOPWORDS_FILE
+    s) echo $OPTARG | tr ' ' '\n' > $TEMP_STOPWORDS_FILE
       STOPWORDS_FILE="./$TEMP_STOPWORDS_FILE"
       ;;
   esac
@@ -32,7 +32,7 @@ done
 
 ensureInputFiles
 
-TOP10=$(cat $DIARY_FILE)
+TOP10=$(cat $DIARY_FILE | fgrep -vf $STOPWORDS_FILE)
 
 # Just leaving this here as a reference - the below doesn't work correctly.
 #TOP10=$(cat $DIARY_FILE | tr -c '[:alnum:]' '[\n*]' | tr -d ' ' | tr -s '[:blank:]' '\n' | fgrep -vf $STOPWORDS_FILE | sort | uniq -c | sort -nr | head  -10 | awk '{print $2}')

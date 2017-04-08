@@ -28,3 +28,8 @@ load 'libs/bats-assert/load'
   run bash top_ten.sh -d "bob bert" -s "bob"
   assert_output "bert"
 }
+
+@test "two words, both in stopwords, returns nothing" {
+  run bash top_ten.sh -d "bob bert" -s "bob bert"
+  assert_output ""
+}

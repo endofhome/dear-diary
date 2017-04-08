@@ -29,7 +29,7 @@ while getopts d:s: opt; do
   esac
 done
 
-TOP10=$(cat $DIARY_FILE | tr -d '[:punct:]' | tr -c '[:alnum:]' '[\n*]'  | fgrep -vf $STOPWORDS_FILE | uniq -c | sort -nr | head -10 | awk '{print $2}')
+TOP10=$(cat $DIARY_FILE | tr -d '[:punct:]' | tr -c '[:alnum:]' '[\n*]'  | fgrep -vwf $STOPWORDS_FILE | uniq -c | sort -nr | head -10 | awk '{print $2}')
 
 # Just leaving this here as a reference - the below doesn't work correctly.
 #TOP10=$(cat $DIARY_FILE | tr -c '[:alnum:]' '[\n*]' | tr -d ' ' | tr -s '[:blank:]' '\n' | fgrep -vf $STOPWORDS_FILE | sort | uniq -c | sort -nr | head  -10 | awk '{print $2}')

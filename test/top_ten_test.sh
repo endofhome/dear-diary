@@ -73,3 +73,8 @@ load 'libs/bats-assert/load'
   run bash top_ten.sh -d "Saturday 8th April 2017, worked solo: TDD, TDD, TDD, TDD bats bats. bats. bats, bats bats bash bash bash. tmux. tmux vim, vim" -s "Saturday 8th April 2017 worked solo"
   assert_output "bats TDD bash vim tmux"
 }
+
+@test "compare using whole words not substrings" {
+  run bash top_ten.sh -d "bash jade flavour" -s "a"
+  assert_output "jade flavour bash"
+}

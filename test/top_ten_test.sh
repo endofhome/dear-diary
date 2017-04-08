@@ -63,3 +63,14 @@ load 'libs/bats-assert/load'
   run bash top_ten.sh -d "k k j j i i h h g g f e d c b a" -s "z"
   assert_output "k j i h g f e d c b"
 }
+
+@test "strip punctuation from entries" {
+  run bash top_ten.sh -d "one two two three, three three." -s "four"
+  assert_output "three two one"
+}
+
+@test "more realistic diary entry" {
+  skip "not quite ready for prime time"
+  run bash top_ten.sh -d "Saturday 8th April 2017, worked solo: TDD TDD TDD bats bats bats bats bats bash bash. tmux tmux vim vim" -s "intellij"
+  assert_output "bats TDD bash tmux vim"
+}

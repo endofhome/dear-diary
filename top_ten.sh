@@ -3,21 +3,20 @@
 TEMP_DIARY_FILE="temp_diary_file.txt"
 TEMP_STOPWORDS_FILE="temp_stopwords_file.txt"
 
-
 function ensureInputFiles {
   if [[ -z $DIARY_FILE ]]; then
     DIARY_FILE=~/diary.txt
   fi
 
-  if [[ -z $STOPWORDS_FILE ]]; then
-    STOPWORDS_FILE=stopwords.txt
-  fi
+  STOPWORDS_FILE=stopwords.txt
 }
 
 function cleanUp {
   rm $TEMP_DIARY_FILE 2> /dev/null
   rm $TEMP_STOPWORDS_FILE 2> /dev/null
 }
+
+ensureInputFiles
 
 while getopts d:s: opt; do
   case "$opt" in
@@ -30,9 +29,7 @@ while getopts d:s: opt; do
   esac
 done
 
-ensureInputFiles
-
-TOP10=$(cat $DIARY_FILE | tr -c '[:alnum:]' '[\n*]'  | fgrep -vf $STOPWORDS_FILE | uniq -c | sort -nr | head -10 | awk '{print $2}')
+TOP10=$(cat $DIARY_FILE | tr -d '[:punct:]' | tr -c '[:alnum:]' '[\n*]'  | fgrep -vf $STOPWORDS_FILE | uniq -c | sort -nr | head -10 | awk '{print $2}')
 
 # Just leaving this here as a reference - the below doesn't work correctly.
 #TOP10=$(cat $DIARY_FILE | tr -c '[:alnum:]' '[\n*]' | tr -d ' ' | tr -s '[:blank:]' '\n' | fgrep -vf $STOPWORDS_FILE | sort | uniq -c | sort -nr | head  -10 | awk '{print $2}')

@@ -69,12 +69,30 @@ load 'libs/bats-assert/load'
   assert_output "three two one"
 }
 
-@test "a diary entry with date, pairing info and punctuation" {
-  run bash top_ten.sh -d "Saturday 8th April 2017, worked solo: TDD, TDD, TDD, TDD bats bats. bats. bats, bats bats bash bash bash. tmux. tmux vim, vim" -s "Saturday 8th April 2017 worked solo"
-  assert_output "bats TDD bash vim tmux"
+@test "a diary entry with date, pairing info and punctuation correctly sorted" {
+  run bash top_ten.sh -d "Saturday 8th April 2017, worked solo: vim TDD, TDD, TDD, TDD bats bats. bats. bats, bats bats bash bash bash. TDD tmux. tmux vim, vim" -s "Saturday 8th April 2017 worked solo"
+  assert_output "bats TDD vim bash tmux"
 }
 
-@test "compare using whole words not substrings" {
-  run bash top_ten.sh -d "bash jade flavour" -s "a"
+@test "compare using whole diary words not substrings" {
+  run bash top_ten.sh -d "bash jade a flavour" -s "a"
   assert_output "jade flavour bash"
+}
+
+@test "integration using diary entry args and real stopwords file" {
+  skip "not quite ready for prime-time"
+  run bash top_ten.sh -d "a above became afterwards back with anywhere Kotlin whereby"
+  assert_output "Kotlin"
+}
+
+@test "integration using real diary file and stopwords args" {
+  skip "not quite ready for prime-time"
+  run bash top_ten.sh -s "ren"
+  assert_output "?"
+}
+
+@test "calling with default file paths as arguments should be same as without arguments" {
+  run bash top_ten.sh -d "$(cat $DIARY_FILE)" -s "$(cat stopwords.txt)"
+  NORMAL_OUTPUT="$(bash top_ten.sh)"
+  assert_output "$NORMAL_OUTPUT"
 }

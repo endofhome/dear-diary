@@ -93,6 +93,5 @@ load 'libs/bats-assert/load'
 
 @test "calling with default file paths as arguments should be same as without arguments" {
   run bash top_ten.sh -d "$(cat $DIARY_FILE)" -s "$(cat stopwords.txt)"
-  NORMAL_OUTPUT="$(bash top_ten.sh)"
-  assert_output "$NORMAL_OUTPUT"
+  assert_output "$(bash top_ten.sh)"
 }

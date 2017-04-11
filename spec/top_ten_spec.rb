@@ -8,4 +8,8 @@ describe TopTen do
         expect(top_ten.top_ten('bob', '')).to eq 'bob'
     end
 
+    it 'single word with different stopword returns same word' do
+	expect(top_ten.top_ten('bob', 'bert')).to eq 'bob'
+    end
+
 end

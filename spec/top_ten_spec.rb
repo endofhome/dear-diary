@@ -12,4 +12,8 @@ describe TopTen do
 	expect(top_ten.top_ten('bob', 'bert')).to eq 'bob'
     end
 
+    it 'single word also included in stopwords returns nothing' do
+	expect(top_ten.top_ten('bob', 'bob')).to eq ''
+    end
+
 end

@@ -19,7 +19,7 @@ describe Searcher do
 
   it 'two words, neither in stopwords, returns both words' do
     searcher = described_class.new([])
-    expect(searcher.top_ten(['bob', 'jim'])).to eq ['bob', 'jim']
+    expect(searcher.top_ten(['jim', 'bob'])).to eq ['jim', 'bob']
   end
 
   it 'two words, one in stopwords, returns the other' do
@@ -30,6 +30,11 @@ describe Searcher do
   it 'two words, both in stopwords, returns nothing' do
     searcher = described_class.new(['bob', 'jim'])
     expect(searcher.top_ten(['bob', 'jim'])).to eq []
+  end
+
+  it 'ten words, none in stopwords, returns all ten in reverse alphabetical order' do
+    searcher = described_class.new([])
+    expect(searcher.top_ten(%w(a b d c f e g h j i ))).to eq %w(j i h g f e d c b a)
   end
 
 end

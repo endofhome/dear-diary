@@ -22,4 +22,9 @@ describe Searcher do
     expect(searcher.top_ten(['bob', 'jim'])).to eq ['bob', 'jim']
   end
 
+  it 'two words, one in stopwords, returns the other' do
+    searcher = described_class.new(['bob'])
+    expect(searcher.top_ten(['bob', 'jim'])).to eq ['jim']
+  end
+
 end

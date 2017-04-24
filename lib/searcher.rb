@@ -6,8 +6,8 @@ class Searcher
   end
 
   def top_ten(diary_entry)
-    diary_entry.each do |e| 
-      if !@stopwords.include? e
+    diary_entry.each do |e|
+      unless @stopwords.include? e
         @result << e
       end
     end

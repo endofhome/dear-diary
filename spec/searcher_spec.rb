@@ -37,4 +37,9 @@ describe Searcher do
     expect(searcher.top_ten(%w(a b d c f e g h j i ))).to eq %w(j i h g f e d c b a)
   end
 
+  it 'ten words, five in stopwords, returns other five in reverse alphabetical order' do
+    searcher = described_class.new(%w(a c e g h))
+    expect(searcher.top_ten(%w(a b d c f e g h j i ))).to eq %w(j i f d b)
+  end
+
 end

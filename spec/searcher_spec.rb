@@ -42,4 +42,9 @@ describe Searcher do
     expect(searcher.top_ten(%w(a b d c f e g h j i ))).to eq %w(j i f d b)
   end
 
+  it 'ten words including duplicates, none in stopwords, returns all words without duplicates in reverse alphabetical order' do
+    searcher = described_class.new(['jim'])
+    expect(searcher.top_ten(%w(bob bob kim kim steve steve thurston thurston lee lee))).to eq %w(thurston steve lee kim bob)
+  end
+
 end

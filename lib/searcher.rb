@@ -11,7 +11,7 @@ class Searcher
         @result << e
       end
     end
-    @result.sort.reverse
+    @result.sort.uniq.reverse
   end
 
 end

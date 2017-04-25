@@ -52,4 +52,10 @@ describe Searcher do
     expect(searcher.top_ten(%w(lee kim kim kim shelley shelley))).to eq %w(kim shelley lee)
   end
 
+  it 'eleven unique words used repeatedly, top ten are returned' do
+    searcher = described_class.new(['z'])
+    search_words = %w(a b b c c c d d d d e e e e e f f f f f f g g g g g g g h h h h h h h h i i i i i i i i i j j j j j j j j j j k k k k k k k k k k k)
+    expect(searcher.top_ten(search_words)).to eq %w(k j i h g f e d c b)
+  end
+
 end

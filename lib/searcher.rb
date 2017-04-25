@@ -9,7 +9,9 @@ class Searcher
     less_stopwords = diary_entry.select { |e| !@stopwords.include? e }
     result_map = create_map(less_stopwords.sort)
     by_frequency = result_map.sort_by {|word, frequency| [frequency, word] }
-    remove_frequency(by_frequency).reverse
+    remove_frequency(by_frequency)
+        .reverse
+        .take(10)
   end
 
   def remove_frequency(words_map_by_freq)

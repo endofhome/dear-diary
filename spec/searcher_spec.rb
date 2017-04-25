@@ -58,4 +58,9 @@ describe Searcher do
     expect(searcher.top_ten(search_words)).to eq %w(k j i h g f e d c b)
   end
 
+  it 'if more than ten words are in the "top ten", fall back on reverse alphabetical order and never take more than ten' do
+    searcher = described_class.new(['z'])
+    expect(searcher.top_ten(%w(k k j j i i h h g g f e d c b a))).to eq %w(k j i h g f e d c b)
+  end
+
 end

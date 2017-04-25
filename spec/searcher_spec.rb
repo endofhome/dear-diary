@@ -63,4 +63,9 @@ describe Searcher do
     expect(searcher.top_ten(%w(k k j j i i h h g g f e d c b a))).to eq %w(k j i h g f e d c b)
   end
 
+  it 'strip punctuation from entries' do
+    searcher = described_class.new('four')
+    expect(searcher.top_ten(%w(one two two three, three three.))).to eq %w(three two one)
+  end
+
 end

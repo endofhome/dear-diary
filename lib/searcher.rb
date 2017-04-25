@@ -7,7 +7,8 @@ class Searcher
 
   def top_ten(diary_entry)
     less_stopwords = diary_entry.select { |e| !@stopwords.include? e }
-    result_map = create_map(less_stopwords.sort)
+    sorted_less_punctutation = less_stopwords.map { |word| word.gsub(/[^a-z ]/, '') }.sort
+    result_map = create_map(sorted_less_punctutation)
     by_frequency = result_map.sort_by {|word, frequency| [frequency, word] }
     remove_frequency(by_frequency)
         .reverse

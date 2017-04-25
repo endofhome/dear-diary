@@ -47,4 +47,9 @@ describe Searcher do
     expect(searcher.top_ten(%w(bob bob kim kim steve steve thurston thurston lee lee))).to eq %w(thurston steve lee kim bob)
   end
 
+  it 'three words returned in order of frequency of use' do
+    searcher = described_class.new(['jim'])
+    expect(searcher.top_ten(%w(lee kim kim kim shelley shelley))).to eq %w(kim shelley lee)
+  end
+
 end

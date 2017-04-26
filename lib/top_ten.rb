@@ -20,4 +20,4 @@ end
 
 parser.parse!
 searcher = Searcher.new(options[:stopwords])
-print "#{searcher.top_ten(options[:diary_entries])}\n"
+puts searcher.top_ten(options[:diary_entries])

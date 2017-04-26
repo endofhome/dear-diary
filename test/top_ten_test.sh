@@ -40,7 +40,7 @@ load 'libs/bats-assert/load'
 }
 
 @test "ten words, five in stopwords, returns other five in reverse alphabetical order" {
-  run bash top_ten.sh -d  "bob bert kim gordon steve shelley thurston moore lee ranaldo" -s "bob kim shelley moore lee"
+run bash top_ten.sh -d  "bob bert kim gordon steve shelley thurston moore lee ranaldo" -s "bob kim shelley moore lee"
   assert_output "thurston steve ranaldo gordon bert"
 }
 
@@ -80,15 +80,24 @@ load 'libs/bats-assert/load'
 }
 
 @test "integration using diary entry args and real stopwords file" {
-  skip "not quite ready for prime-time"
   run bash top_ten.sh -d "a above became afterwards back with anywhere Kotlin whereby"
   assert_output "Kotlin"
 }
 
+@test "as above with custom stopwords" {
+  run bash top_ten.sh -d "a above became afterwards back with anywhere Kotlin whereby" -s "a above became afterwards back with anywhere whereby"
+  assert_output "Kotlin"
+}
+
+@test "another variation which proves there's summin' up with 'a' and 'with'" {
+  run bash top_ten.sh -d "above became afterwards back anywhere Kotlin whereby" -s "above became afterwards back anywhere whereby"
+  assert_output "Kotlin"
+}
+
 @test "integration using real diary file and stopwords args" {
-  skip "not quite ready for prime-time"
-  run bash top_ten.sh -s "ren"
-  assert_output "?"
+  skip "obviously an incredibly flakey test but useful while developing!"
+  run bash top_ten.sh -s "Ren"
+  assert_output "to with the and Paired March 2017 for a"
 }
 
 @test "calling with default file paths as arguments should be same as without arguments" {

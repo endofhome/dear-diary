@@ -68,4 +68,10 @@ describe Searcher do
     expect(searcher.top_ten(%w(one two two three, three three.))).to eq %w(three two one)
   end
 
+  it 'a diary entry with date, pairing info and punctuation correctly sorted' do
+    searcher = described_class.new(%w(Saturday 8th April 2017 worked solo))
+    expect(searcher.top_ten(%w(Saturday 8th April 2017, worked solo: vim TDD, TDD, TDD, TDD bats bats. bats. bats, bats bats bash bash bash. TDD tmux. tmux vim, vim)))
+        .to eq %w(bats TDD vim bash tmux)
+  end
+
 end

@@ -74,4 +74,9 @@ describe Searcher do
         .to eq %w(bats TDD vim bash tmux)
   end
 
+  it 'compare using whole diary words not substrings' do
+    searcher = described_class.new(%w(a))
+    expect(searcher.top_ten(%w(bash jade a flavour))).to eq %w(jade flavour bash)
+  end
+
 end

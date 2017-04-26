@@ -13,6 +13,7 @@ class Searcher
     remove_frequency(by_frequency)
         .reverse
         .take(10)
+        .join(' ')
   end
 
   def remove_frequency(words_map_by_freq)

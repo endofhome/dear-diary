@@ -5,7 +5,7 @@ set -e -o pipefail
 if [[ -z "$DIARY_FILE" ]]; then
   DIARY_FILE=~/.diary.txt
 fi
-OUTPUT_FILE=retro.html
+OUTPUT_FILE=out/retro.html
 ENV_FILE=retro.env
 STOPWORDS_FILE=stopwords.txt
 
@@ -31,7 +31,7 @@ function header {
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="retro.css">
+    <link rel="stylesheet" type="text/css" href="./styles/retro.css">
 
     <style type="text/css">
         /* https://necolas.github.io/normalize.css/ */
@@ -97,7 +97,7 @@ function getProjectEnvVars {
 
 
 function top10hits {
-  TOP10="$(cat <(./top_ten.sh) | tr -c '[:alnum:]' '[\n*]')"
+  TOP10="$(cat <(./lib/top_ten.sh) | tr -c '[:alnum:]' '[\n*]')"
   for HIT in $TOP10
   do
     cat << EOF

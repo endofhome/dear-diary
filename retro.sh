@@ -94,12 +94,14 @@ function getProjectEnvVars {
   fi
 }
 
+
+
 function top10hits {
-  TOP10=$(cat $DIARY_FILE | tr -c '[:alnum:]' '[\n*]' | tr -d ' ' | tr -s '[:blank:]' '\n' | fgrep -vf $STOPWORDS_FILE | sort | uniq -c | sort -nr | head  -10 | awk '{print $2}')
+  TOP10="$(cat <(./top_ten.sh) | tr -c '[:alnum:]' '[\n*]')"
   for HIT in $TOP10
   do
     cat << EOF
-      <span class="circle"">$HIT</span>
+      <span class="circle">$HIT</span>
 EOF
   done
 }

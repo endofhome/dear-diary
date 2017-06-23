@@ -11,10 +11,10 @@ So, Ruby and Bundler. That's about it, assuming you are running an OS that can r
 
 ### Tests
 The main bash script is tested using the `bats` test framework. You can run these tests from the top level by executing `./test/top_ten_spec.sh`
-The Ruby search script is testing using `rspec`. Run `bundle install` from root directory to install rspec and then `rspec test` to run the tests.
+The Ruby search script is tested using `rspec`. Run `bundle install` from root directory to install rspec and then `rspec test` to run the tests.
 
-Want to run *all* the tests? Why the hell not! `./full_suite.sh`. If you don't already have `rspec` installed this script will install it before running the tests.
+Want to run *all* the tests? Why the hell not! `./test/full_suite.sh`. If you don't already have `rspec` installed this script will install it before running the tests.
 ### Usage
-To write a diary file: `./bin/dear-diary.sh`
+To write a diary entry: `./bin/dear-diary.sh`
 
 To write a retro report: `./bin/retro.sh`

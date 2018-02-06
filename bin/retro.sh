@@ -97,7 +97,7 @@ function getProjectEnvVars {
 
 
 function top10hits {
-  TOP10="$(cat <(./lib/top_ten.sh) | tr -c '[:alnum:]' '[\n*]')"
+  TOP10="$(cat <(../lib/top_ten.sh) | tr -c '[:alnum:]' '[\n*]')"
   for HIT in $TOP10
   do
     cat << EOF

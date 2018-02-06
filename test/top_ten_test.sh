@@ -1,4 +1,4 @@
-#!/usr/bin/awk BEGIN{a=ARGV[1];sub(/[a-z_.]+$/,"libs/bats/bin/bats",a);system(a"\t"ARGV[1])}
+#!/usr/bin/awk BEGIN{a=ARGV[1];sub(/[a-z_.]+$/,"libs/bats/libexec/bats",a);system(a"\t"ARGV[1])}
 
 load './libs/bats-support/load'
 load './libs/bats-assert/load'

@@ -1,4 +1,7 @@
-# dear-diary (wip)
+# dear-diary
+
+### Work in progress
+I haven't finished this but I also haven't wanted to work on it for a while. At some point I broke part of the report as the top 10 words are not currently displayed. There are no acceptance tests though, so I didn't realise at the time and it hasn't proven to be a feature I miss too much. Having used it on and off over the past couple of years, I've found it to be useful at times but there are several issues that I've thought to fix but not taken the time to yet. I learned a lot about Bash and interestingly, the `bats` Bash testing framework.
 
 ### Premise
 Every few weeks I attend a retrospective for my project at work. Problem is, I can't remember much before the events of last week.
